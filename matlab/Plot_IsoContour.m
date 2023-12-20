@@ -49,7 +49,12 @@ function [h,cap] = Plot_IsoContour(UIAxes,PseudoSectionData, data)
             Xx   = griddata(axisX,axisY,X,Xm,Ym);
             minX = min(Xx(:));
             maxX = max(Xx(:));
+            %%% Original
             v    = str2num(data.min) + 1e-10:str2num(data.stp):str2num(data.max) + 1e-10;
+
+            % % % Jian's modification
+            % % v    = str2num(data.min):str2num(data.stp):str2num(data.max) + 1e-10;
+            if length(v)==1, v=[v, v]; end
 
             [c,h]  = contour(UIAxes,axisXx,axisYx,Xx,v, data.style,'ShowText','on');
             clabel(c,h,'FontSize',str2num(data.FtSize),'Color',data.lblC);
